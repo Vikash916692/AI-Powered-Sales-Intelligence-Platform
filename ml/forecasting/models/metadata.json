@@ -1,0 +1,36 @@
+{
+    "model_name": "Multi-Horizon Sales & Demand Forecaster",
+    "target": "daily_revenue",
+    "feature_count": 20,
+    "feature_list": [
+        "lag_1",
+        "lag_2",
+        "lag_3",
+        "lag_7",
+        "lag_14",
+        "lag_21",
+        "lag_28",
+        "lag_30",
+        "rolling_mean_7",
+        "rolling_std_7",
+        "rolling_mean_14",
+        "rolling_mean_30",
+        "rolling_std_30",
+        "day_of_week",
+        "day_of_month",
+        "month",
+        "quarter",
+        "is_weekend",
+        "trend_index",
+        "is_black_friday_season"
+    ],
+    "model_type": "RidgeRegressor",
+    "test_horizon_days": 60,
+    "evaluation_summary": {
+        "mae": 6259.056,
+        "rmse": 7701.2439,
+        "r2": 0.7081,
+        "mape": 2.1284
+    },
+    "created_at": "2026-08-18T17:08:35.680402+00:00"
+}

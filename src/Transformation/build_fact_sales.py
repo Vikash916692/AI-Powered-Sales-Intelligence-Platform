@@ -214,7 +214,7 @@ def build_fact_sales(engine):
         result = connection.execute(query)
 
         print(
-            f"[OK] Fact sales transformation completed"
+            "[OK] Fact sales transformation completed"
         )
 
         print(

@@ -1,0 +1,31 @@
+{
+    "selected_model": "RidgeRegressor",
+    "test_metrics": {
+        "mae": 6259.056,
+        "rmse": 7701.2439,
+        "r2": 0.7081,
+        "mape": 2.1284
+    },
+    "tournament_comparison": {
+        "RidgeRegressor": {
+            "mae": 6259.056,
+            "rmse": 7701.2439,
+            "r2": 0.7081,
+            "mape": 2.1284
+        },
+        "RandomForestRegressor": {
+            "mae": 6623.6625,
+            "rmse": 8284.7714,
+            "r2": 0.6622,
+            "mape": 2.4238
+        },
+        "HistGradientBoostingRegressor": {
+            "mae": 6261.2792,
+            "rmse": 8345.5959,
+            "r2": 0.6572,
+            "mape": 2.6979
+        }
+    },
+    "test_horizon_days": 60,
+    "residual_std": 6895.44
+}

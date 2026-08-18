@@ -10,8 +10,8 @@ An enterprise-grade, end-to-end **AI-Powered Sales Intelligence Platform** that 
 | :--- | :--- | :--- |
 | **Phase 1: Data Engineering & Warehousing** | MySQL 8.4 container, raw data ingestion, dimensional modeling (Star Schema: 5 Dims, 3 Facts, 6 Aggregates), and validation notebooks | <kbd>✅ COMPLETED</kbd> |
 | **Phase 2: Business Analytics & SQL Intelligence** | 12 modular SQL intelligence modules, RFM segmentation, cohort retention, Pareto (80/20) analysis, and 12 analytical data marts | <kbd>✅ COMPLETED</kbd> |
-| **Phase 3: Machine Learning & Predictive Analytics** | Time-series revenue forecasting (Prophet), customer churn modeling, and anomaly detection | <kbd>🔄 IN PROGRESS</kbd> |
-| **Phase 4: Agentic AI & RAG System** | LangGraph agent workflows, ChromaDB vector retrieval, autonomous root-cause analysis, and natural language SQL query generation | <kbd>📅 PLANNED</kbd> |
+| **Phase 3: Machine Learning & Predictive Analytics** | 5 production ML pipelines: Churn Prediction, CLV Regression, Sales Forecasting, Seller Risk Scoring, Product Recommendations | <kbd>✅ COMPLETED</kbd> |
+| **Phase 4: Agentic AI & RAG System** | LangGraph agent workflows, ChromaDB vector retrieval, autonomous root-cause analysis, and natural language SQL query generation | <kbd>🔄 IN PROGRESS</kbd> |
 | **Phase 5: Backend API & Async Processing** | FastAPI REST endpoints, JWT auth, Redis caching, Celery task queues | <kbd>📅 PLANNED</kbd> |
 | **Phase 6: Interactive BI & Executive Dashboards** | Web-based analytics interface, automated PDF/Excel executive reporting | <kbd>📅 PLANNED</kbd> |
 

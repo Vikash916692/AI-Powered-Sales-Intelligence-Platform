@@ -10,7 +10,6 @@ from sqlalchemy import text
 
 from src.ingestion.database import get_engine
 
-
 # ============================================================
 # 1. DAILY SALES
 # ============================================================

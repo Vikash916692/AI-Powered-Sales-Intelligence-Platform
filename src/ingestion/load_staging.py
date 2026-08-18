@@ -1,11 +1,11 @@
 import os
+
 os.chdir("..")
 from pathlib import Path
 
 import pandas as pd
 
 from src.ingestion.database import get_engine
-
 
 # --------------------------------------------------
 # Paths

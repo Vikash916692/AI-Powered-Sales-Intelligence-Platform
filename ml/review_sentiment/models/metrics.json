@@ -1,0 +1,75 @@
+{
+    "test_metrics": {
+        "accuracy": 0.9331,
+        "balanced_accuracy": 0.9366,
+        "precision": 0.8485,
+        "recall": 0.9451,
+        "f1_score": 0.8942,
+        "roc_auc": 0.9784,
+        "pr_auc": 0.9489,
+        "brier_score": 0.0521
+    },
+    "classification_report": {
+        "Satisfied": {
+            "precision": 0.9753827058336781,
+            "recall": 0.92796693564259,
+            "f1-score": 0.951084215834594,
+            "support": 5081.0
+        },
+        "Complaint": {
+            "precision": 0.8485099337748344,
+            "recall": 0.9451360073766712,
+            "f1-score": 0.8942202835332607,
+            "support": 2169.0
+        },
+        "accuracy": 0.9331034482758621,
+        "macro avg": {
+            "precision": 0.9119463198042563,
+            "recall": 0.9365514715096306,
+            "f1-score": 0.9226522496839273,
+            "support": 7250.0
+        },
+        "weighted avg": {
+            "precision": 0.9374258723722116,
+            "recall": 0.9331034482758621,
+            "f1-score": 0.9340720959502364,
+            "support": 7250.0
+        }
+    },
+    "test_row_count": 7250,
+    "test_complaints_count": 2169,
+    "top_complaint_words": [
+        "n\u00e3o",
+        "n\u00e3o recomendo",
+        "nao",
+        "p\u00e9ssimo",
+        "comprei",
+        "ruim",
+        "p\u00e9ssima",
+        "aguardando",
+        "nem",
+        "n\u00e3o recebi",
+        "n\u00e3o gostei",
+        "quebrado",
+        "demora",
+        "pior",
+        "defeito"
+    ],
+    "top_satisfied_words": [
+        "bom",
+        "recomendo",
+        "excelente",
+        "parab\u00e9ns",
+        "\u00f3timo",
+        "lindo",
+        "antes",
+        "adorei",
+        "r\u00e1pida",
+        "r\u00e1pido",
+        "perfeito",
+        "amei",
+        "tudo",
+        "boa",
+        "\u00f3tima"
+    ]
+}
