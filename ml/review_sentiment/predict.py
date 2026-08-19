@@ -54,7 +54,7 @@ class ReviewSentimentPredictor:
         self.model = joblib.load(self.model_path)
         self.vectorizer = joblib.load(self.vectorizer_path)
 
-        with open(self.metadata_path, "r", encoding="utf-8") as f:
+        with open(self.metadata_path, encoding="utf-8") as f:
             self.metadata = json.load(f)
 
     def predict_text(self, text_list: list[str]) -> pd.DataFrame:

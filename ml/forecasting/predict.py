@@ -48,10 +48,10 @@ class SalesForecaster:
         self.model = joblib.load(self.model_path)
         self.preprocessor = joblib.load(self.preprocessor_path)
 
-        with open(self.metadata_path, "r", encoding="utf-8") as f:
+        with open(self.metadata_path, encoding="utf-8") as f:
             self.metadata = json.load(f)
 
-        with open(self.metrics_path, "r", encoding="utf-8") as f:
+        with open(self.metrics_path, encoding="utf-8") as f:
             metrics = json.load(f)
             self.residual_std = metrics.get("residual_std", 3500.0)
 

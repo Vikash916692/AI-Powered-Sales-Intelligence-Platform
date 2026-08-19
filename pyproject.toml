@@ -45,6 +45,7 @@ dependencies = [
     "scipy>=1.18.0",
     "sqlalchemy>=2.0.51",
     "statsmodels>=0.14.6",
+    "streamlit>=1.61.1",
     "uvicorn[standard]>=0.52.1",
     "xlsxwriter>=3.2.9",
 ]
@@ -55,3 +56,12 @@ ai-powered-sales-intelligence-platform = "ai_powered_sales_intelligence_platform
 [build-system]
 requires = ["uv_build>=0.12.3,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "BLE"]
+ignore = ["B008", "BLE001", "E501", "E402", "B905"]
+
+

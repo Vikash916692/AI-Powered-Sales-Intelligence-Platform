@@ -60,7 +60,7 @@ class DeliveryDelayPredictor:
         self.model = joblib.load(self.model_path)
         self.preprocessor = joblib.load(self.preprocessor_path)
 
-        with open(self.metadata_path, "r", encoding="utf-8") as f:
+        with open(self.metadata_path, encoding="utf-8") as f:
             self.metadata = json.load(f)
 
     def predict(self, df_features: pd.DataFrame) -> pd.DataFrame:

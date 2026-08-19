@@ -40,7 +40,7 @@ class RecommendationEngine:
         self.item_similarities = joblib.load(self.item_sim_path)
         self.category_recommendations = joblib.load(self.cat_rec_path)
 
-        with open(self.metadata_path, "r", encoding="utf-8") as f:
+        with open(self.metadata_path, encoding="utf-8") as f:
             self.metadata = json.load(f)
 
         self.global_top_10 = self.metadata.get("global_top_10", [])

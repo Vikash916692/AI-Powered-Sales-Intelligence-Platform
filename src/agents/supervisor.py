@@ -264,15 +264,23 @@ class SalesIntelligenceSupervisor:
         )
 
         synth_prompt = (
-            f"### USER BUSINESS QUESTION:\n{query}\n\n"
+            f"### USER INQUIRY:\n{query}\n\n"
             f"### VERIFIED DATA & ML EVIDENCE:\n"
             f"{' '.join(evidence_summary)}\n\n"
-            "Synthesize this evidence into a clean, executive-ready sales intelligence report. "
-            "Highlight key numbers, operational takeaways, and strategic recommendations."
+            "INSTRUCTIONS:\n"
+            "1. Answer the user's specific inquiry directly, accurately, and concisely using the verified evidence above.\n"
+            "2. For straightforward factual or numerical questions (e.g. counts, sums, averages, metrics), provide the exact numbers clearly with a brief 1-2 sentence context. Do NOT generate unnecessary 30-day plans, generic recommendation tables, or extraneous boilerplate.\n"
+            "3. Only provide deeper strategic analysis, recommendations, or root cause diagnoses when the user explicitly asks for analysis, diagnostics, or recommendations.\n"
+            "4. Never invent or hallucinate data not found in the verified evidence."
         )
 
         messages = [
-            SystemMessage(content="You are an Executive Sales Intelligence Assistant. Deliver crisp, numbers-backed answers."),
+            SystemMessage(
+                content=(
+                    "You are a helpful, precise Executive Sales Intelligence AI Assistant. "
+                    "You provide direct, numbers-backed answers tailored to the user's question without unnecessary filler."
+                )
+            ),
             HumanMessage(content=synth_prompt),
         ]
 
@@ -281,10 +289,8 @@ class SalesIntelligenceSupervisor:
 
         audit_trail = tracker.format_markdown_audit_trail()
 
-        full_output = f"{content}\n\n---\n\n{audit_trail}"
-
         return {
-            "final_response": full_output,
+            "final_response": content,
             "audit_trail": audit_trail,
             "provenance_data": tracker.to_dict(),
         }
