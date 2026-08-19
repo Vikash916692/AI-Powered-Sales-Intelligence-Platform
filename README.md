@@ -10,158 +10,141 @@
 [![Tests](https://img.shields.io/badge/Test_Suite-80%20Passed%20(100%25)-brightgreen.svg)]()
 [![Code Style](https://img.shields.io/badge/Code_Style-Ruff_Compliant-000000.svg)](https://github.com/astral-sh/ruff)
 
-An enterprise-grade, end-to-end **AI-Powered Sales Intelligence & Decision-Support Platform**. It unifies modern **Data Engineering & Warehousing**, **Advanced SQL Business Analytics**, **Production Machine Learning**, **Agentic AI & Retrieval-Augmented Generation (RAG)**, **High-Performance FastAPI REST Backends**, and an **Executive Streamlit BI Command Center** with automated PDF & Excel briefing generation.
+An enterprise-grade, end-to-end **AI-Powered Sales Intelligence & Decision-Support Platform**. It transforms raw e-commerce transactional data into an intelligent executive decision-making system through modern **Data Warehousing**, **Advanced SQL Business Analytics**, **Production Machine Learning**, **Agentic AI & Retrieval-Augmented Generation (RAG)**, **FastAPI REST Backends**, and an **Interactive Streamlit BI Command Center** with automated PDF & Excel briefing generation.
 
 ---
 
-## 📌 Executive Architecture & Highlights
+## 📖 Deep-Dive: How the Platform Works (Step-by-Step)
 
-```mermaid
-flowchart TD
-    subgraph DataSources ["1. Raw Ingestion Layer (Olist E-Commerce)"]
-        CSV["9 Raw Datasets (Orders, Items, Customers, Products, Payments, Reviews, Sellers, Geo, Translations)"]
-    end
+The platform is engineered as a 6-stage progressive data and intelligence pipeline. Each stage builds directly upon the validated foundation of the previous stage:
 
-    subgraph DataWarehouse ["2. Data Engineering & Warehousing (MySQL 8.4)"]
-        Staging["Staging Tables (stg_*)"]
-        Dimensions["Star-Schema Dimensions\n(dim_customer, dim_product, dim_seller, dim_geography, dim_date)"]
-        Facts["Fact Tables\n(fact_sales, fact_payments, fact_reviews)"]
-        Aggregates["Pre-Calculated Aggregates\n(agg_daily_sales, agg_monthly_sales, agg_product_performance, agg_seller_performance, agg_geography_sales, agg_customer_rfm)"]
-    end
-
-    subgraph AnalyticsMarts ["3. Advanced SQL Analytics & 12 Data Marts"]
-        Marts["12 Production Data Marts\n(sales_mart, customer_mart, rfm_mart, product_mart, seller_mart, retention_mart, concentration_marts, delivery_mart, review_mart, sales_intelligence_mart)"]
-    end
-
-    subgraph ML_Layer ["4. Production Machine Learning Suite"]
-        ML_Delay["Logistics Delay Classifier\n(HistGBM: 79.5% Acc, 0.759 AUC)"]
-        ML_Forecast["Sales Forecaster\n(Multi-Lag Ridge: R² = 0.708)"]
-        ML_Recs["Cross-Sell Recommender\n(Item-Item Cosine Similarity)"]
-        ML_NLP["Sentiment & CSAT Classifier\n(TF-IDF + LogReg: 93.3% Acc, 0.978 AUC)"]
-    end
-
-    subgraph Agentic_RAG ["5. Agentic AI, RAG & Security Governance"]
-        Supervisor["LangGraph Supervisor Orchestrator"]
-        NL_SQL["Self-Healing Text-to-SQL Agent"]
-        KPI_Engine["Deterministic KPI Calculation Engine"]
-        RCA_Agent["Autonomous Root-Cause Diagnostic Agent"]
-        ChromaRAG["Dual-Collection ChromaDB RAG\n(schema_catalog & business_knowledge)"]
-        Guards["SQLGuard AST Filter + PromptGuard Injection Defense"]
-        Audit["Verifiable Provenance Audit Trail Tracker"]
-    end
-
-    subgraph Presentation_API ["6. Production API, UI & Executive Briefings"]
-        FastAPI["FastAPI REST Backend (JWT / RBAC / Redis Caching)"]
-        Streamlit["Executive Streamlit BI Command Center (7 Pages)"]
-        Reports["Automated ReportLab PDF & Multi-Tab Excel Briefing Generator"]
-    end
-
-    CSV --> Staging
-    Staging --> Dimensions & Facts
-    Dimensions & Facts --> Aggregates
-    Aggregates & Facts --> Marts
-    Marts --> ML_Layer & Agentic_RAG
-    ML_Layer --> Agentic_RAG
-    Agentic_RAG --> FastAPI & Streamlit
-    FastAPI --> Streamlit & Reports
+```text
+[Raw E-Commerce CSVs] 
+        │
+        ▼  (Step 1: Automated Ingestion & Staging)
+[MySQL 8.4 Staging Layer (stg_*)]
+        │
+        ▼  (Step 2: Dimensional Modeling & Aggregations)
+[Star-Schema Warehouse (5 Dims, 3 Facts, 6 Aggregates)]
+        │
+        ▼  (Step 3: Advanced SQL Analytics)
+[12 Analytical Production Data Marts]
+        │
+        ├──► (Step 4: Machine Learning Suite) ──────────────┐
+        │     • Delivery Delay Classifier (79.5% Acc)        │
+        │     • Sales Forecaster (R² = 0.708)                │
+        │     • Cross-Sell Recommender (1,199 rules)         │
+        │     • Sentiment NLP Classifier (93.3% Acc)         ▼
+        │                                            [Agentic AI & RAG Layer]
+        └──► (Step 5: Agentic AI & RAG Orchestration) ───────┤
+              • LangGraph Supervisor Router                  │
+              • Self-Healing Text-to-SQL                     │
+              • Deterministic KPI Engine                     │
+              • Autonomous Root-Cause Diagnostics (RCA)      │
+              • Dual-Collection ChromaDB Vector Store        │
+              • AST SQLGuard & PromptGuard Security          │
+                                                             ▼
+                                             [Step 6: Production Delivery]
+                                              • FastAPI REST API (JWT/RBAC)
+                                              • Streamlit BI Command Center
+                                              • Automated PDF & Excel Briefings
 ```
 
 ---
 
-## 🌟 Key Platform Capabilities
-
-| Capability Domain | Technical Implementation | Business Impact |
-| :--- | :--- | :--- |
-| **Data Warehousing** | MySQL 8.4 Star Schema (5 Dimensions, 3 Facts, 6 Analytical Aggregates) | Sub-second analytical queries across 100K+ historical e-commerce transactions. |
-| **SQL Business Intelligence** | 12 Production Data Marts, `NTILE(5)` RFM Segmentation, Cohort Retention Matrices, Pareto (80/20) Analysis | Instant 360° visibility into revenue concentration, customer lifetime value, and merchant performance. |
-| **Predictive ML Engines** | 4 Clean Production Models (Delivery Delay Risk, Multi-Horizon Sales Forecaster, Product Cross-Sell Recommender, Review NLP) | Proactive fulfillment risk prevention, forward revenue visibility, and automated CSAT sentiment routing. |
-| **Agentic AI & RAG** | LangGraph Multi-Agent Supervisor, Dual-Collection ChromaDB Vector Store, Self-Healing SQL generator, Autonomous Root-Cause Analysis | Empowers non-technical executives to query data marts, run ML predictions, and diagnose metric drops in plain English. |
-| **Enterprise Security & Governance** | SQLGuard AST-based SQL query sanitizer, PromptGuard prompt-injection blocker, Verifiable Provenance Audit Trail | Guarantees zero SQL injection, enforces read-only warehouse access, and records verifiable evidence logs for every AI answer. |
-| **REST API & BI Command Center** | FastAPI REST endpoints with JWT/RBAC security, Redis caching with in-memory fallback, 7-page Dark Mode Streamlit UI | Provides low-latency REST APIs for external integration and an interactive executive cockpit. |
-| **Automated Executive Briefings** | ReportLab PDF Briefing Books + openpyxl Styled Multi-Tab Excel Workbooks | One-click generation of board-ready performance summaries and operational spreadsheets. |
+### 🔹 Step 1: Raw Data Ingestion & Automated Staging
+- **Data Source**: 9 comprehensive Brazilian e-commerce datasets from Olist (Orders, Order Items, Customers, Products, Payments, Reviews, Sellers, Geolocation, and Product Category Name Translations).
+- **Automated Batch Processing**: [`src/ingestion/load_staging.py`](file:///c:/Users/dell/Desktop/AI-Powered%20Sales%20Intelligence%20Platform/src/ingestion/load_staging.py) handles raw CSV validation, schema typing, null handling, and batch-loads over 1M+ geolocation records and 100K+ transactional records into MySQL staging tables (`stg_*`).
+- **Connection Management**: Powered by [`src/ingestion/database.py`](file:///c:/Users/dell/Desktop/AI-Powered%20Sales%20Intelligence%20Platform/src/ingestion/database.py), utilizing thread-safe connection pooling and reconnect capabilities.
 
 ---
 
-## 🏗️ Detailed Architectural Milestones
+### 🔹 Step 2: Star-Schema Data Warehousing
+To enable fast analytical queries, the staging data is transformed into a clean **Star-Schema Data Warehouse** with surrogate integer keys:
+1. **5 Dimension Tables (`dim_*`)**:
+   - `dim_customer`: Customer UUIDs, ZIP codes, cities, and states.
+   - `dim_product`: Product physical dimensions, weights, and English-translated categories.
+   - `dim_seller`: Merchant identifiers, cities, and states.
+   - `dim_geography`: Normalized geographic centroids (mean latitude and longitude per ZIP code).
+   - `dim_date`: Complete calendar dimension with year, quarter, month, day name, week of year, and weekend flags.
+2. **3 Fact Tables (`fact_*`)**:
+   - `fact_sales`: Granular order-item grain containing item prices, freight values, delivery lead times, delay flags, and surrogate foreign keys.
+   - `fact_payments`: Sequential transaction records, payment methods, installments, and payment amounts.
+   - `fact_reviews`: Customer satisfaction ratings, comment flags, and review response latencies.
+3. **6 Analytical Aggregates (`agg_*`)**:
+   - `agg_daily_sales`, `agg_monthly_sales`, `agg_product_performance`, `agg_seller_performance`, `agg_geography_sales`, and `agg_customer_rfm`.
 
-### 1. Data Engineering & Warehousing (Phase 1)
-- **Automated Ingestion Pipeline**: Ingests 9 raw Brazilian E-Commerce CSV datasets (orders, items, customers, products, payments, reviews, sellers, geolocation, category translations) into structured MySQL staging tables.
-- **Star Schema Architecture**:
-  - `dim_customer`: Unique customer UUIDs, ZIP prefixes, cities, and states.
-  - `dim_product`: Cleaned product dimensions, weights, and English translated categories.
-  - `dim_seller`: Merchant profiles and operational locations.
-  - `dim_geography`: Cleaned geographic centroids (latitude/longitude averages per ZIP).
-  - `dim_date`: Complete calendar dimension with year, quarter, month, day name, week of year, and weekend flags.
-- **Granular Fact Tables**:
-  - `fact_sales`: Order-item grain with prices, freight, delivery tracking metrics, delay flags, and surrogate foreign keys.
-  - `fact_payments`: Sequential transaction records, payment methods, installments, and values.
-  - `fact_reviews`: Review satisfaction scores, response times, and customer comments.
-- **High-Performance Aggregates**:
-  - `agg_daily_sales`, `agg_monthly_sales`, `agg_product_performance`, `agg_seller_performance`, `agg_geography_sales`, `agg_customer_rfm`.
+---
 
-### 2. Advanced SQL Analytics & 12 Data Marts (Phase 2)
-The platform compiles 12 specialized production data marts via modular analytical SQL:
-1. `sales_mart`: Daily order volumes, revenue, freight, and Average Order Value (AOV).
-2. `customer_mart`: Customer lifetime span, repeat order frequency, and acquisition metrics.
-3. `rfm_mart`: `NTILE(5)` Recency, Frequency, and Monetary scores mapped to customer tiers (*Champions*, *Loyalists*, *At Risk*, *Lost*).
-4. `product_mart`: Product sales velocity, catalog revenue share, and unit volumes.
-5. `seller_mart`: Merchant fulfillment volume, order counts, and revenue contribution.
-6. `retention_mart`: Monthly acquisition cohort retention matrices.
-7. `customer_concentration_mart`: Pareto cumulative customer revenue ranking (Top 10% flag).
-8. `product_concentration_mart`: Pareto cumulative product revenue ranking (Top 20% flag).
-9. `seller_concentration_mart`: Pareto cumulative merchant revenue ranking (Top 10% flag).
-10. `delivery_mart`: Logistics fulfillment status, lead times, and SLA delay distributions.
-11. `review_mart`: Customer satisfaction ratings, response times, and sentiment distributions.
-12. `sales_intelligence_mart`: Executive business intelligence summary KPIs.
+### 🔹 Step 3: Advanced SQL Analytics & 12 Production Data Marts
+The warehouse data is compiled into 12 domain-specific **Analytical Data Marts** using advanced MySQL window functions, CTEs, and cumulative ranking algorithms:
+- **`sales_mart`**: Daily order counts, gross revenue, freight revenue, and Average Order Value (AOV).
+- **`customer_mart`**: Customer lifetime spans, repeat order frequency, and acquisition metrics.
+- **`rfm_mart`**: Scores Recency, Frequency, and Monetary metrics using SQL `NTILE(5)` window functions, classifying customers into actionable tiers (*Champions*, *Loyal Customers*, *At Risk*, *Lost*).
+- **`product_mart`**: Item sales velocity, catalog revenue shares, and unit volume metrics.
+- **`seller_mart`**: Merchant sales volume, order counts, and revenue contribution.
+- **`retention_mart`**: Monthly acquisition cohort retention matrices tracking cohort retention decay.
+- **`customer_concentration_mart`**: Pareto (80/20) cumulative customer revenue ranking (identifying Top 10% customers).
+- **`product_concentration_mart`**: Pareto cumulative catalog revenue ranking (identifying Top 20% revenue drivers).
+- **`seller_concentration_mart`**: Pareto cumulative seller revenue ranking (identifying Top 10% merchants).
+- **`delivery_mart`**: Logistics lead times, delivery transit averages, and SLA delay distributions.
+- **`review_mart`**: Customer satisfaction score distributions and sentiment breakdowns.
+- **`sales_intelligence_mart`**: High-level consolidated executive business intelligence KPIs.
 
-### 3. Production Machine Learning Suite (Phase 3)
-Four high-accuracy, production-grade ML pipelines trained on the analytical data marts:
+---
 
-| Model Pipeline | Algorithm | Primary Metrics | Key Features | Business Value |
+### 🔹 Step 4: Production Machine Learning Suite
+The platform trains and deploys 4 production-grade Machine Learning models using the analytical data marts:
+
+| ML Pipeline | Algorithm | Hold-Out Test Metric | Key Features | Business Value |
 | :--- | :--- | :--- | :--- | :--- |
-| **1. Delivery Delay Predictor** | `HistGradientBoostingClassifier` | **ROC-AUC: `0.7588`**<br>Accuracy: `79.53%`<br>Delay Recall: `55.12%` | Freight ratio, package weight/dimensions, seller historical delay rate, interstate route | Predicts delivery delay probability *at checkout* to alert logistics teams. |
-| **2. Sales & Revenue Forecaster** | `RidgeRegressor` (Multi-Lag) | **$R^2$: `0.7081`**<br>MAE: `$6,259.06$`<br>RMSE: `$7,701.24$` | Autoregressive lags ($t-1 \dots t-30$), rolling 7/14/30-day stats, day-of-week & month | Delivers recursive forward 30/60/90-day revenue projections with 95% confidence bounds. |
-| **3. Product Recommendation Engine** | `Sparse Item-Item Cosine Similarity` | **Coverage: `100%`**<br>Item Rules: `1,199`<br>Categories: `73` | Co-occurrence transaction matrix with popularity fallbacks | Suggests complementary items to boost cart conversion and Average Order Value (AOV). |
-| **4. Review Sentiment NLP Classifier** | `TF-IDF + LogisticRegression` | **Accuracy: `93.31%`**<br>F1-Score: `0.8942`<br>ROC-AUC: `0.9784`<br>Recall: `94.51%` | Sublinear TF-IDF n-grams with Portuguese stopword normalization | Detects negative customer sentiment in real time, auto-routing urgent complaints to support. |
-
-### 4. Agentic AI, RAG & Security Governance (Phase 4)
-- **LangGraph Multi-Agent Supervisor**: Intelligently routes queries across specialized sub-agents:
-  - **Self-Healing Text-to-SQL Agent**: Converts natural language into valid MySQL 8.4 queries with automated error recovery.
-  - **KPI Intelligence Engine**: Directly executes verified deterministic mathematical formulas for executive KPIs.
-  - **Autonomous Root-Cause Analysis (RCA) Agent**: Decomposes performance anomalies across monthly revenue trends, product category contractions, and interstate logistics bottlenecks.
-  - **Predictive ML Agent**: Triggers live inference across delay, forecasting, recommendation, and sentiment pipelines.
-  - **Hybrid Multi-Agent Workflow**: Chains RCA diagnostics with forward sales forecasting and cross-sell recovery recommendations.
-- **Dual-Collection ChromaDB RAG**:
-  - `schema_catalog`: Indexes technical DDL, column types, grains, and join paths for Text-to-SQL retrieval.
-  - `business_knowledge`: Indexes executive KPI formulas, SLAs, RFM definitions, and operational policies.
-- **Enterprise Guardrails & Security**:
-  - `SQLGuard`: AST-based query validator enforcing read-only `SELECT` / `WITH` execution, row limit clamping, and prevention of destructive commands (`DROP`, `DELETE`, `UPDATE`, `INSERT`, `TRUNCATE`, `ALTER`, `GRANT`).
-  - `PromptGuard`: Sanitizes user inputs to neutralize prompt injection and jailbreak attempts.
-  - `ProvenanceTracker`: Attaches verifiable evidence logs (SQL executed, tables queried, ML models invoked, execution latency) to every response.
-
-### 5. Production FastAPI Backend (Phase 5)
-- **REST Endpoints**: Comprehensive OpenAPI/Swagger documented routes for Authentication, KPI Calculations, Analytics Data Marts, ML Predictions, Agent Workflows, PDF/Excel Reports, and System Health.
-- **Security & RBAC**: JWT Bearer tokens with Role-Based Access Control (`admin`, `analyst`, `viewer`).
-- **Caching & Async Queues**: Redis caching with transparent in-memory fallback and background task simulation.
-
-### 6. Executive Streamlit BI Command Center (Phase 6)
-An interactive, dark-themed Streamlit application with 7 dedicated modules:
-1. **Executive Overview**: High-level KPIs, revenue run-rates, and sales velocity charts.
-2. **Customer & RFM Analytics**: RFM segment distributions, customer lifetime value, and cohort retention heatmap.
-3. **Logistics & Delivery SLAs**: Interstate transit times, carrier delay hotspots, and SLA compliance metrics.
-4. **ML Predictive Simulators**: Interactive sandbox to test delay risk, forward forecasts, basket cross-sells, and sentiment.
-5. **AI Agent Copilot**: Conversational interface with multi-agent orchestration and expandable Provenance Audit Drawers.
-6. **Report Exports**: One-click generation and direct download of executive PDF and Excel briefing books.
-7. **System Health & Telemetry**: Real-time database pooling status, Redis cache hit rates, and vector store metrics.
+| **1. Delivery Delay Risk** | `HistGradientBoostingClassifier` | **ROC-AUC: `0.7588`**<br>Accuracy: `79.53%`<br>Delay Recall: `55.12%` | Freight ratio, package weight/dimensions, seller historical delay rate, interstate route | Predicts delivery delay probability *at checkout* to alert logistics teams before dispatch. |
+| **2. Multi-Horizon Forecaster** | `RidgeRegressor` (Multi-Lag) | **$R^2$: `0.7081`**<br>MAE: `$6,259.06$`<br>RMSE: `$7,701.24$` | Autoregressive lags ($t-1 \dots t-30$), rolling 7/14/30-day stats, day-of-week & month | Recursive forward 30/60/90-day revenue projections with 95% confidence bounds. |
+| **3. Product Cross-Sell Recs** | `Sparse Item-Item Cosine Similarity` | **Coverage: `100%`**<br>Item Rules: `1,199`<br>Categories: `73` | Co-occurrence transaction matrix with category popularity fallbacks | Suggests complementary items to boost cart conversion and Average Order Value (AOV). |
+| **4. Review Sentiment NLP** | `TF-IDF + LogisticRegression` | **Accuracy: `93.31%`**<br>F1-Score: `0.8942`<br>ROC-AUC: `0.9784`<br>Recall: `94.51%` | Sublinear TF-IDF n-grams with Portuguese stopword normalization | Detects negative customer sentiment in real time, auto-routing urgent complaints to customer support. |
 
 ---
 
-## 📂 Repository Directory Layout
+### 🔹 Step 5: Agentic AI, RAG & Security Governance
+The platform incorporates a **LangGraph-powered Multi-Agent Orchestrator** enabling natural language business queries:
+- **Intelligent Supervisor Router**: Classifies questions into specialized subgraphs:
+  - **Self-Healing Text-to-SQL Agent**: Retrieves relevant table DDLs from ChromaDB, writes valid MySQL 8.4 queries, and autonomously repairs SQL syntax errors if execution fails.
+  - **Deterministic KPI Engine**: Calculates mathematical business metrics (AOV, repeat rate, SLA compliance) directly without LLM hallucination risk.
+  - **Autonomous Root-Cause Analysis (RCA) Agent**: Pinpoints business metric anomalies by decomposing performance across monthly revenue trends, product category variances, and interstate logistics bottlenecks.
+  - **Predictive ML Agent**: Executes on-demand predictions for delivery risk, forward revenue forecasting, product recommendations, and review sentiment.
+  - **Hybrid Composite Workflow**: Chains RCA anomaly diagnostics with forward forecasting and cross-sell recovery strategies in a single workflow.
+- **Dual-Collection ChromaDB Vector Store**:
+  - `schema_catalog`: Stores table DDLs, column data types, and join paths for Text-to-SQL retrieval.
+  - `business_knowledge`: Stores executive KPI formulas, SLAs, RFM definitions, and business rules.
+- **Security & Safety Guardrails**:
+  - `SQLGuard`: AST-based SQL query sanitizer using `sqlglot` to enforce read-only execution (`SELECT` / `WITH`), clamp row limits (max 1,000), and block destructive statements.
+  - `PromptGuard`: Sanitizes user inputs against prompt injection and jailbreak attempts.
+  - `ProvenanceTracker`: Records and attaches verifiable evidence (SQL executed, tables accessed, execution latency, and ML model versions) to every response.
+
+---
+
+### 🔹 Step 6: Production Backend, Interactive UI & Automated Reporting
+- **FastAPI REST Backend**: Fully typed, asynchronous REST API with JWT Bearer authentication, Role-Based Access Control (`admin`, `analyst`, `viewer`), and Redis caching with automatic in-memory fallback.
+- **Executive Streamlit BI Command Center**: 7 interactive dark-mode analytics modules:
+  1. **Executive Overview**: High-level revenue run-rates, order volume, and AOV metrics.
+  2. **Customer & RFM Analytics**: RFM segment distributions, customer lifetime value, and cohort retention heatmaps.
+  3. **Logistics & Delivery SLAs**: Interstate transit times, carrier delay hotspots, and SLA compliance metrics.
+  4. **ML Predictive Simulators**: Interactive sandbox to test delay risk, forward forecasts, basket cross-sells, and sentiment.
+  5. **AI Agent Copilot**: Conversational interface with multi-agent orchestration and expandable Provenance Audit Drawers.
+  6. **Report Exports**: One-click generation and direct download of executive PDF and Excel briefing books.
+  7. **System Health & Telemetry**: Real-time database pooling status, Redis cache hit rates, and vector store metrics.
+- **Automated Briefing Book Generators**:
+  - **PDF Briefings**: ReportLab compiler producing board-ready executive summaries with styled KPI scorecards and trend charts.
+  - **Excel Briefings**: Multi-tab styled workbooks built with `openpyxl`, featuring formatted number styling, automated column auto-fitting, and data mart extracts.
+
+---
+
+## 📂 Repository Structure
 
 ```text
 AI-Powered Sales Intelligence Platform/
 ├── docker-compose.yml                     # Containerized MySQL 8.4 & Redis 7 services
-├── pyproject.toml                         # Project metadata and UV package dependencies
+├── pyproject.toml                         # Modern UV dependency specifications
 ├── requirements.txt                       # Locked dependencies
 ├── .env.example                           # Template for environment configuration
 ├── chat.py                                # Interactive Terminal AI Agent Console
@@ -244,7 +227,7 @@ AI-Powered Sales Intelligence Platform/
 
 ---
 
-## ⚡ Quickstart Guide
+## ⚡ Quickstart & Setup Guide
 
 ### 1. Prerequisites
 - **Python**: `3.13+`
@@ -261,7 +244,7 @@ Clone the repository and create your `.env` configuration:
 cp .env.example .env
 ```
 
-Configure your `.env` file:
+Ensure your `.env` contains:
 ```env
 APP_ENV=development
 
@@ -404,11 +387,10 @@ The FastAPI backend exposes fully typed REST endpoints with OpenAPI/Swagger docu
 
 ---
 
-## 🧪 Testing & Verification
+## 🧪 Testing & Quality Assurance
 
-The platform maintains a comprehensive test suite covering unit tests, integration tests, E2E multi-agent workflows, and API security.
+The platform maintains a comprehensive test suite covering unit tests, integration tests, E2E multi-agent workflows, and API security:
 
-Execute the entire test suite:
 ```bash
 pytest tests/ -v
 ```
@@ -431,7 +413,7 @@ tests/test_security.py .................                                    [100
 ======================== 80 passed in 76.31s (100%) ========================
 ```
 
-Run code formatting and lint checks:
+Run code quality and lint checks:
 ```bash
 ruff check .
 ```
@@ -440,4 +422,4 @@ ruff check .
 
 ## 📄 License & Attribution
 
-This project is built and maintained as an enterprise-grade AI and Data Analytics platform. Built with modern open-source technologies including MySQL, FastAPI, Streamlit, LangChain/LangGraph, ChromaDB, and Scikit-Learn.
+This platform is built and maintained as an enterprise-grade AI and Data Analytics system. Powered by open-source technologies including MySQL, FastAPI, Streamlit, LangChain/LangGraph, ChromaDB, and Scikit-Learn.
