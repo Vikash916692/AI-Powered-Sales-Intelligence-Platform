@@ -2,9 +2,9 @@
 Unified evaluation metrics suite for Classification, Regression, Time-Series Forecasting, and Ranking.
 """
 
-import numpy as np
 from typing import Any
 
+import numpy as np
 from sklearn.metrics import (
     accuracy_score,
     average_precision_score,
